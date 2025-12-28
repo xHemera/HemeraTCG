@@ -80,11 +80,11 @@
   <main class="max-w-3xl mx-auto px-4 pt-10 pb-20">
     <section class="text-center mb-10">
       <h1 class="text-4xl font-bold tracking-tight bg-gradient-to-r from-white via-accent-300 to-cyan-400 bg-clip-text text-transparent">Contact</h1>
-      <p class="mt-3 text-white/60">Useful links & socials — Linktree style</p>
+      <p class="mt-3 text-white/60">Useful links & socials</p>
     </section>
 
     <section class="space-y-4">
-      <a href="#" id="havre-link" target="_blank" rel="noreferrer" class="glass rounded-2xl p-5 flex items-center gap-5 transition group">
+      <a href="https://discord.gg/ercwJFBy42" id="havre-link" target="_blank" rel="noreferrer" class="glass rounded-2xl p-5 flex items-center gap-5 transition group">
         <div class="h-12 w-12 rounded-xl bg-accent-500/10 border border-accent-500/20 p-2 flex items-center justify-center">
           <img src="social-icons/havre.png" alt="Havre de Duel" class="h-full w-full object-contain">
         </div>
@@ -95,7 +95,7 @@
         <span class="text-accent-300 text-sm font-medium">Join →</span>
       </a>
 
-      <a href="#" id="silent-link" target="_blank" rel="noreferrer" class="glass rounded-2xl p-5 flex items-center gap-5 transition group">
+      <a href="https://discord.gg/VKaFT95Z2z" id="silent-link" target="_blank" rel="noreferrer" class="glass rounded-2xl p-5 flex items-center gap-5 transition group">
         <div class="h-12 w-12 rounded-xl bg-accent-500/10 border border-accent-500/20 p-2 flex items-center justify-center">
           <img src="social-icons/silent-lab.png" alt="Silent Lab" class="h-full w-full object-contain">
         </div>
@@ -129,7 +129,7 @@
       </a>
     </section>
 
-    <p class="mt-10 text-center text-xs text-white/40">Replace Discord URLs with your invitation links when you have them.</p>
+    <p class="mt-10 text-center text-xs text-white/40"></p>
   </main>
 
   <script>
@@ -138,9 +138,6 @@
     copyBtn?.addEventListener('click', async () => {
       try { await navigator.clipboard.writeText('x.hemera'); copyBtn.textContent = 'Copied!'; setTimeout(()=>copyBtn.textContent='Copy', 1500); } catch {}
     });
-    // Placeholders — à remplacer par tes vrais liens d'invitation Discord
-    $('#havre-link').href = '#';
-    $('#silent-link').href = '#';
   </script>
 </body>
 </html>
