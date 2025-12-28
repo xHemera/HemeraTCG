@@ -4,7 +4,14 @@
       "id": "regidrago-vstar",
       "name": "Regidrago Vstar",
       "file": "regidrago-vstar.md",
-      "icon1": "expanded-decks/assets/icons/regidrago.png"
+      "icon1": "expanded-decks/assets/icons/regidrago.png",
+      "check": true,
+      "authorCredit": {
+        "name": "Lubyllule (Stéphane Ivanoff)",
+        "description": "This guide is summarized from his Twitter thread",
+        "avatar": "social-icons/luby.jpg",
+        "link": "https://x.com/lubyllule/status/1782861203506622520"
+      }
     },
     {
       "id": "shadow-rider-vmax",
@@ -17,13 +24,27 @@
       "name": "Mew Vmax",
       "file": "mew-vmax.md",
       "icon1": "expanded-decks/assets/icons/mew.png",
-	  "icon2": "expanded-decks/assets/icons/genesect.png"
+	  "icon2": "expanded-decks/assets/icons/genesect.png",
+      "check": true,
+      "authorCredit": {
+        "name": "Lubyllule (Stéphane Ivanoff)",
+        "description": "This guide is summarized from his Twitter thread",
+        "avatar": "social-icons/luby.jpg",
+        "link": "https://x.com/lubyllule/status/1808156863986274755"
+      }
     },
     {
       "id": "charizard-ex",
       "name": "TeraZard",
       "file": "charizard-ex.md",
-      "icon1": "expanded-decks/assets/icons/charizard.png"
+      "icon1": "expanded-decks/assets/icons/charizard.png",
+      "check": true,
+      "authorCredit": {
+        "name": "Lubyllule (Stéphane Ivanoff)",
+        "description": "This guide is summarized from his Twitter thread",
+        "avatar": "social-icons/luby.jpg",
+        "link": "https://x.com/lubyllule/status/1790468650673025365"
+      }
     },
     {
       "id": "lugia",
@@ -37,7 +58,14 @@
       "name": "Vileplume Bunnelby",
       "file": "vileplume-bunnelby.md",
       "icon1": "expanded-decks/assets/icons/vileplume.png",
-	  "icon2": "expanded-decks/assets/icons/bunnelby.png"
+	  "icon2": "expanded-decks/assets/icons/bunnelby.png",
+      "check": true,
+      "authorCredit": {
+        "name": "Lubyllule (Stéphane Ivanoff)",
+        "description": "This guide is summarized from his Twitter thread",
+        "avatar": "social-icons/luby.jpg",
+        "link": "https://x.com/lubyllule/status/1841155814947471792"
+      }
     },
     {
       "id": "ceruledge",
@@ -49,14 +77,28 @@
       "id": "miraidon",
       "name": "Miraidon Box",
       "file": "miraidon.md",
-      "icon1": "expanded-decks/assets/icons/miraidon.png"
+      "icon1": "expanded-decks/assets/icons/miraidon.png",
+      "check": true,
+	  "authorCredit": {
+        "name": "Lubyllule (Stéphane Ivanoff)",
+        "description": "This guide is summarized from his Twitter thread",
+        "avatar": "social-icons/luby.jpg",
+        "link": "https://x.com/lubyllule/status/1904303865899733083"
+      }
     },
     {
       "id": "tsareena",
       "name": "Tsareena V",
       "file": "tsareena.md",
       "icon1": "expanded-decks/assets/icons/tsareena.png",
-	  "icon2": "expanded-decks/assets/icons/garbodor.png"
+	  "icon2": "expanded-decks/assets/icons/garbodor.png",
+      "check": true,
+      "authorCredit": {
+        "name": "Lubyllule (Stéphane Ivanoff)",
+        "description": "This guide is summarized from his Twitter thread",
+        "avatar": "social-icons/luby.jpg",
+        "link": "https://x.com/lubyllule/status/1787930036676280745"
+      }
     }
   ]
 }

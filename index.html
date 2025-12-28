@@ -74,6 +74,66 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
     }
+    .author-credit {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0rem 1.25rem;
+      margin: 2rem 0;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(34,211,238,0.04));
+      border: 1px solid rgba(139,92,246,0.2);
+      transition: all 0.3s ease;
+    }
+    .author-credit:hover {
+      border-color: rgba(139,92,246,0.4);
+      background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(34,211,238,0.06));
+    }
+    .author-credit-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(139,92,246,0.3);
+    }
+    .author-credit-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .author-credit-name {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .author-credit-desc {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .author-credit-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.3);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .author-credit-link:hover {
+      background: rgba(139,92,246,0.25);
+      border-color: rgba(139,92,246,0.5);
+      transform: translateX(4px);
+    }
+    .author-credit-link svg {
+      width: 20px;
+      height: 20px;
+      color: rgba(139,92,246,0.9);
+    }
   </style>
 </head>
 <body class="bg-base-900 text-white font-display selection:bg-accent-500/40 selection:text-white">
@@ -197,7 +257,7 @@
     function renderDeckNavbar() {
       const scroller = $('#deckScroller');
       const icon = $('#expandIcon');
-      
+
       // Update classes based on expanded state
       if (state.expanded) {
         scroller.classList.remove('overflow-x-auto');
@@ -208,14 +268,16 @@
         scroller.classList.remove('flex-wrap');
         if (icon) icon.style.transform = 'rotate(0deg)';
       }
-      
+
       scroller.innerHTML = '';
       state.decks.forEach(d => {
         const btn = document.createElement('button');
         btn.className = 'group relative shrink-0 px-4 py-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 hover:border-accent-500/30 hover:shadow-glow transition-all duration-300 text-left';
         btn.setAttribute('data-id', d.id);
         const icons = [d.icon1, d.icon2].filter(Boolean).map((src,i)=> deckIcon(src, d.name)).join('');
+        const checkmark = d.check ? `<svg class="absolute -top-1 -right-1 w-5 h-5 text-green-400 bg-base-900 rounded-full" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>` : '';
         btn.innerHTML = `
+          ${checkmark}
           <div class="flex items-center gap-3">
             <div class="flex -space-x-2">${icons}</div>
             <span class="text-sm font-semibold group-hover:text-accent-300 transition whitespace-nowrap">${d.name}</span>
@@ -273,6 +335,33 @@
         console.log('HTML generated, length:', html.length);
         art.innerHTML = html;
         console.log('HTML inserted into DOM');
+
+        // Inject author credit if deck has authorCredit metadata
+        if (deck.authorCredit) {
+          const firstH1 = $('h1', art);
+          if (firstH1) {
+            const creditCard = document.createElement('div');
+            creditCard.className = 'author-credit';
+            creditCard.innerHTML = `
+              <img src="${deck.authorCredit.avatar}" alt="${deck.authorCredit.name}" class="author-credit-avatar">
+              <div class="author-credit-content">
+                <div class="author-credit-name">${deck.authorCredit.name}</div>
+                <div class="author-credit-desc">${deck.authorCredit.description}</div>
+              </div>
+              <a href="${deck.authorCredit.link}" target="_blank" rel="noreferrer" class="author-credit-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </a>
+            `;
+            // Insert after first image (decklist) if it exists, otherwise after h1
+            const firstImg = firstH1.nextElementSibling?.tagName === 'P' && firstH1.nextElementSibling.querySelector('img')
+              ? firstH1.nextElementSibling
+              : firstH1;
+            firstImg.insertAdjacentElement('afterend', creditCard);
+          }
+        }
+
         // Enhance links
         $$('a', art).forEach(a => { a.classList.add('text-accent-300','hover:text-white','underline','decoration-accent-500/50'); a.setAttribute('target','_blank'); a.setAttribute('rel','noreferrer'); });
         // Prose tuning
