@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hemera TCG — Expanded Gauntlet</title>
+  <meta name="color-scheme" content="dark light" />
+  <meta name="description" content="Expanded Gauntlet — decks and guides for the Expanded format" />
+  <link rel="icon" href="expanded-decks/assets/icons/calyrex-shadow-rider.png" />
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            base: {
+              950: '#06080F',
+              900: '#0A0E1A',
+              800: '#111827',
+              700: '#1F2937',
+              600: '#374151'
+            },
+            accent: {
+              600: '#6D28D9',
+              500: '#8B5CF6',
+              400: '#A78BFA',
+              300: '#C4B5FD'
+            },
+            cyan: {
+              500: '#06B6D4',
+              400: '#22D3EE',
+              300: '#67E8F9'
+            }
+          },
+          boxShadow: {
+            glow: '0 0 24px rgba(139, 92, 246, 0.4)',
+            'glow-lg': '0 0 40px rgba(139, 92, 246, 0.3)',
+            neon: '0 0 20px rgba(34, 211, 238, 0.4)'
+          },
+          fontFamily: {
+            display: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    html, body { height: 100%; }
+    .glass {
+      backdrop-filter: saturate(180%) blur(16px);
+      background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(34,211,238,0.04));
+      border: 1px solid rgba(139,92,246,0.15);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass:hover {
+      border-color: rgba(139,92,246,0.3);
+      background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(34,211,238,0.06));
+    }
+    .gradient-border { position: relative; }
+    .gradient-border::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.6), rgba(34,211,238,0.4));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+  </style>
+</head>
+<body class="bg-base-900 text-white font-display selection:bg-accent-500/40 selection:text-white">
+  <div class="fixed -z-10 inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute -top-40 -left-20 h-80 w-80 rounded-full blur-3xl opacity-30" style="background: radial-gradient(closest-side, #7C3AED, transparent)"></div>
+    <div class="absolute top-40 right-0 h-96 w-96 rounded-full blur-3xl opacity-20" style="background: radial-gradient(closest-side, #00E5FF, transparent)"></div>
+  </div>
+
+  <header class="sticky top-0 z-40 backdrop-blur-xl supports-[backdrop-filter]:bg-base-950/80 bg-base-950/90 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <a href="./" class="group inline-flex items-center gap-3 hover:opacity-80 transition">
+          <img src="expanded-decks/assets/icons/calyrex-shadow-rider.png" alt="Hemera" class="h-9 w-9 object-contain drop-shadow-lg">
+          <span class="text-lg font-bold tracking-tight">Hemera TCG</span>
+          <span class="ml-2 text-xs px-2.5 py-1 rounded-full bg-accent-500/20 border border-accent-500/30 text-accent-300 font-medium">Expanded</span>
+        </a>
+        <nav class="flex items-center gap-1">
+          <a href="./index.html" class="px-4 py-2 rounded-lg text-sm font-medium bg-accent-500/10 text-white border border-accent-500/20 shadow-glow">Expanded Gauntlet</a>
+          <a href="./contact.html" class="px-4 py-2 rounded-lg text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 border border-transparent transition">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="border-t border-white/5">
+      <div class="max-w-6xl mx-auto px-4 py-5">
+        <div id="deckScroller" class="flex items-center gap-4 overflow-x-auto pb-2 px-1">
+          <!-- deck buttons injected here -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pt-8 pb-16">
+    <!-- <section id="hero" class="relative mb-10">
+      <div class="glass gradient-border rounded-2xl p-8">
+        <div class="flex flex-col md:flex-row md:items-center gap-8">
+          <div class="flex-1">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-white via-accent-300 to-cyan-400 bg-clip-text text-transparent">Expanded Gauntlet</h1>
+            <p class="mt-3 text-white/60 leading-relaxed">Choisissez un deck dans la barre ci-dessus pour afficher son guide en Markdown. La liste est gérée via <span class="font-semibold text-accent-300">expanded-decks/decks.json</span>.</p>
+          </div>
+          <div class="flex items-center gap-3 text-sm">
+            <a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-500/20 text-accent-300 border border-accent-500/30 hover:shadow-glow hover:bg-accent-500/30 transition font-medium" href="./contact.html">Contact</a>
+            <a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 text-white/70 border border-white/10 hover:bg-white/10 hover:text-white transition" href="https://github.com/" target="_blank" rel="noreferrer">GitHub Pages</a>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <section id="content" class="relative">
+      <article id="deckContent" class="prose prose-invert max-w-none">
+        <!-- Rendered markdown goes here -->
+      </article>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 bg-base-950/50 py-8">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-white/50 text-sm">
+      <div class="flex items-center gap-2">
+        <span>© <span id="year"></span> Hemera TCG · Expanded Format</span>
+        <span class="text-white/30">·</span>
+        <span class="text-accent-300/70 font-medium">Community Driven</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="./contact.html" class="hover:text-accent-300 transition">Contact</a>
+        <a href="#top" class="hover:text-accent-300 transition">Back to Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    // Year
+    $('#year').textContent = new Date().getFullYear();
+
+    // Markdown renderer setup
+    if (typeof marked !== 'undefined') {
+      if (marked.setOptions) {
+        marked.setOptions({ breaks: true, gfm: true });
+      }
+    }
+
+    // Load decks from JSON and build navbar
+    const state = { decks: [], current: null };
+
+    const getParam = (k) => new URLSearchParams(location.search).get(k);
+    const setParam = (k, v) => {
+      const u = new URL(location.href);
+      if (v) u.searchParams.set(k, v); else u.searchParams.delete(k);
+      history.replaceState({}, '', u);
+    };
+
+    async function loadDecks() {
+      try {
+        const res = await fetch('./expanded-decks/decks.json', { cache: 'no-cache' });
+        const data = await res.json();
+        state.decks = data.decks || [];
+        renderDeckNavbar();
+        const initial = getParam('deck') || (state.decks[0]?.id || null);
+        if (initial) selectDeck(initial);
+      } catch (e) {
+        console.error(e);
+        $('#deckScroller').innerHTML = '<div class="text-red-300">Error loading decks.json</div>';
+      }
+    }
+
+    function deckIcon(img, alt) {
+      return `<span class="relative flex items-center justify-center w-10 h-10">
+        <img src="${img}" alt="${alt}" class="max-w-full max-h-full object-contain drop-shadow"/>
+      </span>`;
+    }
+
+    function renderDeckNavbar() {
+      const scroller = $('#deckScroller');
+      scroller.innerHTML = '';
+      state.decks.forEach(d => {
+        const btn = document.createElement('button');
+        btn.className = 'group relative shrink-0 px-4 py-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 hover:border-accent-500/30 hover:shadow-glow transition-all duration-300 text-left';
+        btn.setAttribute('data-id', d.id);
+        const icons = [d.icon1, d.icon2].filter(Boolean).map((src,i)=> deckIcon(src, d.name)).join('');
+        btn.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="flex -space-x-2">${icons}</div>
+            <span class="text-sm font-semibold group-hover:text-accent-300 transition whitespace-nowrap">${d.name}</span>
+          </div>`;
+        btn.addEventListener('click', () => selectDeck(d.id));
+        scroller.appendChild(btn);
+      });
+    }
+
+    async function selectDeck(id) {
+      console.log('selectDeck called with id:', id);
+      const deck = state.decks.find(x => x.id === id);
+      console.log('Found deck:', deck);
+      if (!deck) return;
+      state.current = id;
+      setParam('deck', id);
+      $$('[data-id]', $('#deckScroller')).forEach(el => {
+        const isActive = el.getAttribute('data-id') === id;
+        el.classList.toggle('ring-1', isActive);
+        el.classList.toggle('ring-inset', isActive);
+        el.classList.toggle('ring-accent-500', isActive);
+        el.classList.toggle('shadow-glow-lg', isActive);
+        el.classList.toggle('bg-accent-500/10', isActive);
+        el.classList.toggle('border-accent-500/40', isActive);
+      });
+      const art = $('#deckContent');
+      console.log('deckContent element:', art);
+      art.innerHTML = '<div class="p-4 text-white/70">Loading guide…</div>';
+      try {
+        const url = `./expanded-decks/${deck.file}`;
+        console.log('Fetching:', url);
+        const res = await fetch(url, { cache: 'no-cache' });
+        console.log('Fetch response:', res.status, res.ok);
+        if (!res.ok) throw new Error('404');
+        const md = await res.text();
+        console.log('Markdown loaded, length:', md.length);
+        console.log('Marked available?', typeof marked !== 'undefined');
+
+        // Support both marked() and marked.parse() APIs
+        let html;
+        if (typeof marked !== 'undefined') {
+          if (typeof marked.parse === 'function') {
+            console.log('Using marked.parse()');
+            html = marked.parse(md);
+          } else if (typeof marked === 'function') {
+            console.log('Using marked()');
+            html = marked(md);
+          } else {
+            throw new Error('Marked library not loaded correctly');
+          }
+        } else {
+          throw new Error('Marked library not found');
+        }
+
+        console.log('HTML generated, length:', html.length);
+        art.innerHTML = html;
+        console.log('HTML inserted into DOM');
+        // Enhance links
+        $$('a', art).forEach(a => { a.classList.add('text-accent-300','hover:text-white','underline','decoration-accent-500/50'); a.setAttribute('target','_blank'); a.setAttribute('rel','noreferrer'); });
+        // Prose tuning
+        art.classList.add('prose','prose-invert','max-w-none');
+        console.log('Deck loaded successfully');
+      } catch (e) {
+        console.error('Error loading deck:', e);
+        art.innerHTML = `<div class="p-4 text-red-300">Unable to load this deck's markdown guide. Error: ${e.message}</div>`;
+      }
+    }
+
+    loadDecks();
+  </script>
+</body>
+</html>

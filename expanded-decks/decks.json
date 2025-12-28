@@ -1,0 +1,62 @@
+{
+  "decks": [
+    {
+      "id": "regidrago-vstar",
+      "name": "Regidrago Vstar",
+      "file": "regidrago-vstar.md",
+      "icon1": "expanded-decks/assets/icons/regidrago.png"
+    },
+    {
+      "id": "shadow-rider-vmax",
+      "name": "Shadow Rider Vmax",
+      "file": "shadow-rider-vmax.md",
+      "icon1": "expanded-decks/assets/icons/calyrex-shadow-rider.png"
+    },
+    {
+      "id": "mew-vmax",
+      "name": "Mew Vmax",
+      "file": "mew-vmax.md",
+      "icon1": "expanded-decks/assets/icons/mew.png",
+	  "icon2": "expanded-decks/assets/icons/genesect.png"
+    },
+    {
+      "id": "charizard-ex",
+      "name": "TeraZard",
+      "file": "charizard-ex.md",
+      "icon1": "expanded-decks/assets/icons/charizard.png"
+    },
+    {
+      "id": "lugia",
+      "name": "Rainbow Lugia",
+      "file": "lugia.md",
+      "icon1": "expanded-decks/assets/icons/lugia.png",
+	  "icon2": "expanded-decks/assets/icons/archeops.png"
+    },
+    {
+      "id": "vileplume-bunnelby",
+      "name": "Vileplume Bunnelby",
+      "file": "vileplume-bunnelby.md",
+      "icon1": "expanded-decks/assets/icons/vileplume.png",
+	  "icon2": "expanded-decks/assets/icons/bunnelby.png"
+    },
+    {
+      "id": "ceruledge",
+      "name": "Ceruledge",
+      "file": "ceruledge.md",
+      "icon1": "expanded-decks/assets/icons/ceruledge.png"
+    },
+    {
+      "id": "miraidon",
+      "name": "Miraidon Box",
+      "file": "miraidon.md",
+      "icon1": "expanded-decks/assets/icons/miraidon.png"
+    },
+    {
+      "id": "tsareena",
+      "name": "Tsareena V",
+      "file": "tsareena.md",
+      "icon1": "expanded-decks/assets/icons/tsareena.png",
+	  "icon2": "expanded-decks/assets/icons/garbodor.png"
+    }
+  ]
+}
