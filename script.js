@@ -177,12 +177,49 @@ function showDefaultMessage() {
 }
 
 async function selectDeck(id) {
-  console.log('selectDeck called with id:', id);
   const deck = state.decks.find(x => x.id === id);
-  console.log('Found deck:', deck);
   if (!deck) return;
+
   state.current = id;
   setParam('deck', id);
+  updateActiveButton(id);
+
+  const art = $('#deckContent');
+  art.innerHTML = '<div class="p-4 text-white/70">Loading guide…</div>';
+
+  try {
+    const url = `./expanded-decks/${deck.file}`;
+    const res = await fetch(url, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('404');
+
+    const md = await res.text();
+    const html = typeof marked.parse === 'function' ? marked.parse(md) : marked(md);
+
+    art.innerHTML = html;
+
+    // Inject author credits after the first image
+    if (deck.authorCredit) {
+      const firstImg = art.querySelector('img');
+      if (firstImg?.parentElement) {
+        firstImg.parentElement.insertAdjacentHTML('afterend', buildCreditSection(deck.authorCredit));
+      }
+    }
+
+    // Enhance links
+    $$('a', art).forEach(a => {
+      a.classList.add('text-accent-300', 'hover:text-white', 'underline', 'decoration-accent-500/50');
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noreferrer');
+    });
+
+    art.classList.add('prose', 'prose-invert', 'max-w-none');
+  } catch (e) {
+    console.error('Error loading deck:', e);
+    art.innerHTML = `<div class="p-4 text-red-300">Unable to load this deck's markdown guide.</div>`;
+  }
+}
+
+function updateActiveButton(id) {
   $$('[data-id]', $('#deckScroller')).forEach(el => {
     const isActive = el.getAttribute('data-id') === id;
     el.classList.toggle('ring-1', isActive);
@@ -192,57 +229,6 @@ async function selectDeck(id) {
     el.classList.toggle('bg-accent-500/10', isActive);
     el.classList.toggle('border-accent-500/40', isActive);
   });
-  const art = $('#deckContent');
-  console.log('deckContent element:', art);
-  art.innerHTML = '<div class="p-4 text-white/70">Loading guide…</div>';
-  try {
-    const url = `./expanded-decks/${deck.file}`;
-    console.log('Fetching:', url);
-    const res = await fetch(url, { cache: 'no-cache' });
-    console.log('Fetch response:', res.status, res.ok);
-    if (!res.ok) throw new Error('404');
-    const md = await res.text();
-    console.log('Markdown loaded, length:', md.length);
-    console.log('Marked available?', typeof marked !== 'undefined');
-
-    // Support both marked() and marked.parse() APIs
-    let html;
-    if (typeof marked !== 'undefined') {
-      if (typeof marked.parse === 'function') {
-        console.log('Using marked.parse()');
-        html = marked.parse(md);
-      } else if (typeof marked === 'function') {
-        console.log('Using marked()');
-        html = marked(md);
-      } else {
-        throw new Error('Marked library not loaded correctly');
-      }
-    } else {
-      throw new Error('Marked library not found');
-    }
-
-    console.log('HTML generated, length:', html.length);
-    art.innerHTML = html;
-    console.log('HTML inserted into DOM');
-
-    // Inject author credits from JSON after the first image
-    if (deck.authorCredit) {
-      const firstImg = art.querySelector('img');
-      if (firstImg && firstImg.parentElement) {
-        const creditsHtml = buildCreditSection(deck.authorCredit);
-        firstImg.parentElement.insertAdjacentHTML('afterend', creditsHtml);
-      }
-    }
-
-    // Enhance links
-    $$('a', art).forEach(a => { a.classList.add('text-accent-300','hover:text-white','underline','decoration-accent-500/50'); a.setAttribute('target','_blank'); a.setAttribute('rel','noreferrer'); });
-    // Prose tuning
-    art.classList.add('prose','prose-invert','max-w-none');
-    console.log('Deck loaded successfully');
-  } catch (e) {
-    console.error('Error loading deck:', e);
-    art.innerHTML = `<div class="p-4 text-red-300">Unable to load this deck's markdown guide. Error: ${e.message}</div>`;
-  }
 }
 
 // Toggle expand/collapse
@@ -250,18 +236,7 @@ $('#expandToggle')?.addEventListener('click', () => {
   state.expanded = !state.expanded;
   localStorage.setItem('deckExpanded', state.expanded);
   renderDeckNavbar();
-  // Update active state after re-render
-  if (state.current) {
-    $$('[data-id]', $('#deckScroller')).forEach(el => {
-      const isActive = el.getAttribute('data-id') === state.current;
-      el.classList.toggle('ring-1', isActive);
-      el.classList.toggle('ring-inset', isActive);
-      el.classList.toggle('ring-accent-500', isActive);
-      el.classList.toggle('shadow-glow-lg', isActive);
-      el.classList.toggle('bg-accent-500/10', isActive);
-      el.classList.toggle('border-accent-500/40', isActive);
-    });
-  }
+  if (state.current) updateActiveButton(state.current);
 });
 
 loadDecks();

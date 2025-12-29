@@ -46,7 +46,7 @@
       "id": "charizard-ex",
       "name": "TeraZard",
       "file": "docs/charizard-ex.md",
-	  "show": true,
+	  "show": false,
       "check": false,
       "icon1": "expanded-decks/assets/icons/charizard.png",
       "authorCredit": {

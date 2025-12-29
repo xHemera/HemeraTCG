@@ -84,7 +84,6 @@ html, body {
 
 .credit-name {
   font-weight: 500;
-  vertical-align: middle;
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -137,7 +136,9 @@ html, body {
 @media (max-width: 640px) {
   .credit-item {
     flex-direction: column;
-    text-align: center;
+    height: auto;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
   }
 
   .credit-info {
@@ -150,6 +151,5 @@ html, body {
 
   .credit-link {
     width: 100%;
-    text-align: center;
   }
 }
