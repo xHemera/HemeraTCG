@@ -1,0 +1,99 @@
+html, body { 
+  height: 100%; 
+}
+
+.glass {
+  backdrop-filter: saturate(180%) blur(16px);
+  background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(34,211,238,0.04));
+  border: 1px solid rgba(139,92,246,0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  border-color: rgba(139,92,246,0.3);
+  background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(34,211,238,0.06));
+}
+
+.gradient-border { 
+  position: relative; 
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(139,92,246,0.6), rgba(34,211,238,0.4));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.author-credit {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(34,211,238,0.04));
+  border: 1px solid rgba(139,92,246,0.2);
+  transition: all 0.3s ease;
+}
+
+.author-credit:hover {
+  border-color: rgba(139,92,246,0.4);
+  background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(34,211,238,0.06));
+}
+
+.author-credit-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid rgba(139,92,246,0.3);
+}
+
+.author-credit-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.author-credit-name {
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+}
+
+.author-credit-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.3;
+}
+
+.author-credit-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(139,92,246,0.15);
+  border: 1px solid rgba(139,92,246,0.3);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.author-credit-link:hover {
+  background: rgba(139,92,246,0.25);
+  border-color: rgba(139,92,246,0.5);
+  transform: translateX(4px);
+}
+
+.author-credit-link svg {
+  width: 20px;
+  height: 20px;
+  color: rgba(139,92,246,0.9);
+}

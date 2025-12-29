@@ -19,7 +19,13 @@
       "name": "Shadow Rider Vmax",
       "file": "docs/shadow-rider-vmax.md",
       "check": "wip",
-      "icon1": "expanded-decks/assets/icons/calyrex-shadow-rider.png"
+      "icon1": "expanded-decks/assets/icons/calyrex-shadow-rider.png",
+      "authorCredit": {
+        "name": "Hemera (Tony Besnard)",
+		"role": "owner",
+        "avatar": "social-icons/hemera.png",
+        "link": "./contact.html"
+      }
     },
     {
       "id": "mew-vmax",
