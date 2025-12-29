@@ -73,51 +73,40 @@ function buildCreditSection(credit) {
 }
 
 function getRoleIcon(role) {
+  const roleNames = {
+    'owner': 'Owner',
+    'honor': 'Honor Contributor',
+    'contributor': 'Contributor',
+    'admin': 'Administrator'
+  };
+  
   const icons = {
     'owner': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-            fill="url(#crownGradient)" stroke="rgba(139,92,246,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <defs>
-        <linearGradient id="crownGradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#8B5CF6"/>
-          <stop offset="100%" stop-color="#22D3EE"/>
-        </linearGradient>
-      </defs>
+      <path d="M12 2L14 7L19 8L15.5 11.5L16 17L12 14.5L8 17L8.5 11.5L5 8L10 7L12 2Z" 
+            fill="#FCD34D" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M7 16H17C17 16 18 16 18 17V20C18 21 17 21 17 21H7C7 21 6 21 6 20V17C6 16 7 16 7 16Z" 
+            fill="#FBBF24" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="18" r="1" fill="#F59E0B"/>
+      <circle cx="9" cy="18" r="0.8" fill="#F59E0B"/>
+      <circle cx="15" cy="18" r="0.8" fill="#F59E0B"/>
+    </svg>`,
+    'honor': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 20H21M3.00003 20H5.67457C6.1637 20 6.40827 20 6.63846 19.9447C6.84254 19.8957 7.03763 19.8149 7.2166 19.7053C7.41843 19.5816 7.59139 19.4086 7.93732 19.0627L19.5001 7.49998C20.3285 6.67156 20.3285 5.32841 19.5001 4.49998C18.6716 3.67156 17.3285 3.67156 16.5001 4.49998L4.93729 16.0627C4.59139 16.4086 4.41843 16.5816 4.29475 16.7834C4.18509 16.9624 4.10428 17.1574 4.05529 17.3615C4.00003 17.5917 4.00003 17.8363 4.00003 18.3254V20Z"
+            stroke="#FCD34D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`,
     'contributor': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 20H21M3.00003 20H5.67457C6.1637 20 6.40827 20 6.63846 19.9447C6.84254 19.8957 7.03763 19.8149 7.2166 19.7053C7.41843 19.5816 7.59139 19.4086 7.93732 19.0627L19.5001 7.49998C20.3285 6.67156 20.3285 5.32841 19.5001 4.49998C18.6716 3.67156 17.3285 3.67156 16.5001 4.49998L4.93729 16.0627C4.59139 16.4086 4.41843 16.5816 4.29475 16.7834C4.18509 16.9624 4.10428 17.1574 4.05529 17.3615C4.00003 17.5917 4.00003 17.8363 4.00003 18.3254V20Z"
-            stroke="url(#penGradient)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      <defs>
-        <linearGradient id="penGradient" x1="3" y1="4" x2="21" y2="20" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#8B5CF6"/>
-          <stop offset="100%" stop-color="#22D3EE"/>
-        </linearGradient>
-      </defs>
+            stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`,
-    'translator': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" stroke="url(#globeGradient)" stroke-width="1.8"/>
-      <path d="M2 12H22M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z"
-            stroke="url(#globeGradient)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      <defs>
-        <linearGradient id="globeGradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#8B5CF6"/>
-          <stop offset="100%" stop-color="#22D3EE"/>
-        </linearGradient>
-      </defs>
-    </svg>`,
-    'editor': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M14 3V7C14 7.55228 14.4477 8 15 8H19M14 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V8M14 3L19 8M9 13H15M9 17H15"
-            stroke="url(#docGradient)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      <defs>
-        <linearGradient id="docGradient" x1="5" y1="3" x2="19" y2="21" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#8B5CF6"/>
-          <stop offset="100%" stop-color="#22D3EE"/>
-        </linearGradient>
-      </defs>
+    'admin': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" 
+            fill="#FCA5A5" stroke="#EF4444" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`
   };
+  
   const icon = icons[role] || icons['contributor'];
-  return `<span class="credit-role-icon" title="${role}">${icon}</span>`;
+  const roleName = roleNames[role] || 'Contributor';
+  return `<span class="credit-role-icon" title="${roleName}">${icon}</span>`;
 }
 
 function renderDeckNavbar() {
