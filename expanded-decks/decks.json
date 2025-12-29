@@ -3,9 +3,10 @@
     {
       "id": "regidrago-vstar",
       "name": "Regidrago Vstar",
-      "file": ".regidrago-vstar.md",
+      "file": "docs/regidrago-vstar.md",
+      "show": false,
+      "check": false,
       "icon1": "expanded-decks/assets/icons/regidrago.png",
-      "check": true,
       "authorCredit": {
         "name": "Lubyllule (Stéphane Ivanoff)",
         "description": "This guide is summarized from his Twitter thread",
@@ -16,16 +17,18 @@
     {
       "id": "shadow-rider-vmax",
       "name": "Shadow Rider Vmax",
-      "file": ".shadow-rider-vmax.md",
+      "file": "docs/shadow-rider-vmax.md",
+      "check": "wip",
       "icon1": "expanded-decks/assets/icons/calyrex-shadow-rider.png"
     },
     {
       "id": "mew-vmax",
       "name": "Mew Vmax",
-      "file": ".mew-vmax.md",
+      "file": "docs/mew-vmax.md",
+	  "show": false,
+      "check": false,
       "icon1": "expanded-decks/assets/icons/mew.png",
-	  "icon2": "expanded-decks/assets/icons/genesect.png",
-      "check": true,
+      "icon2": "expanded-decks/assets/icons/genesect.png",
       "authorCredit": {
         "name": "Lubyllule (Stéphane Ivanoff)",
         "description": "This guide is summarized from his Twitter thread",
@@ -36,9 +39,10 @@
     {
       "id": "charizard-ex",
       "name": "TeraZard",
-      "file": ".charizard-ex.md",
+      "file": "docs/charizard-ex.md",
+	  "show": false,
+      "check": false,
       "icon1": "expanded-decks/assets/icons/charizard.png",
-      "check": true,
       "authorCredit": {
         "name": "Lubyllule (Stéphane Ivanoff)",
         "description": "This guide is summarized from his Twitter thread",
@@ -49,17 +53,20 @@
     {
       "id": "lugia",
       "name": "Rainbow Lugia",
-      "file": ".lugia.md",
+      "file": "docs/lugia.md",
+	  "show": false,
+      "check": false,
       "icon1": "expanded-decks/assets/icons/lugia.png",
-	  "icon2": "expanded-decks/assets/icons/archeops.png"
+      "icon2": "expanded-decks/assets/icons/archeops.png"
     },
     {
       "id": "vileplume-bunnelby",
       "name": "Vileplume Bunnelby",
-      "file": ".vileplume-bunnelby.md",
+      "file": "docs/vileplume-bunnelby.md",
+	  "show": false,
+      "check": false,
       "icon1": "expanded-decks/assets/icons/vileplume.png",
-	  "icon2": "expanded-decks/assets/icons/bunnelby.png",
-      "check": true,
+      "icon2": "expanded-decks/assets/icons/bunnelby.png",
       "authorCredit": {
         "name": "Lubyllule (Stéphane Ivanoff)",
         "description": "This guide is summarized from his Twitter thread",
@@ -70,16 +77,19 @@
     {
       "id": "ceruledge",
       "name": "Ceruledge",
-      "file": ".ceruledge.md",
+      "file": "docs/ceruledge.md",
+	  "show": false,
+      "check": false,
       "icon1": "expanded-decks/assets/icons/ceruledge.png"
     },
     {
       "id": "miraidon",
       "name": "Miraidon Box",
-      "file": ".miraidon.md",
+      "file": "docs/miraidon.md",
+	  "show": false,
+      "check": false,
       "icon1": "expanded-decks/assets/icons/miraidon.png",
-      "check": true,
-	  "authorCredit": {
+      "authorCredit": {
         "name": "Lubyllule (Stéphane Ivanoff)",
         "description": "This guide is summarized from his Twitter thread",
         "avatar": "social-icons/luby.jpg",
@@ -89,10 +99,11 @@
     {
       "id": "tsareena",
       "name": "Tsareena V",
-      "file": ".tsareena.md",
+      "file": "docs/tsareena.md",
+	  "show": false,
+      "check": false,
       "icon1": "expanded-decks/assets/icons/tsareena.png",
-	  "icon2": "expanded-decks/assets/icons/garbodor.png",
-      "check": true,
+      "icon2": "expanded-decks/assets/icons/garbodor.png",
       "authorCredit": {
         "name": "Lubyllule (Stéphane Ivanoff)",
         "description": "This guide is summarized from his Twitter thread",

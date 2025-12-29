@@ -240,8 +240,18 @@
         const data = await res.json();
         state.decks = data.decks || [];
         renderDeckNavbar();
-        const initial = getParam('deck') || (state.decks[0]?.id || null);
-        if (initial) selectDeck(initial);
+        const initial = getParam('deck');
+        if (initial) {
+          // Vérifier que le deck existe et est visible
+          const deck = state.decks.find(d => d.id === initial && d.show !== false);
+          if (deck) {
+            selectDeck(initial);
+          } else {
+            showDefaultMessage();
+          }
+        } else {
+          showDefaultMessage();
+        }
       } catch (e) {
         console.error(e);
         $('#deckScroller').innerHTML = '<div class="text-red-300">Error loading decks.json</div>';
@@ -271,11 +281,19 @@
 
       scroller.innerHTML = '';
       state.decks.forEach(d => {
+        // Masquer les decks avec show: false
+        if (d.show === false) return;
+
         const btn = document.createElement('button');
         btn.className = 'group relative shrink-0 px-4 py-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 hover:border-accent-500/30 hover:shadow-glow transition-all duration-300 text-left';
         btn.setAttribute('data-id', d.id);
         const icons = [d.icon1, d.icon2].filter(Boolean).map((src,i)=> deckIcon(src, d.name)).join('');
-        const checkmark = d.check ? `<svg class="absolute -top-1 -right-1 w-5 h-5 text-green-400 bg-base-900 rounded-full" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>` : '';
+        let checkmark = '';
+        if (d.check === true) {
+          checkmark = `<svg class="absolute -top-1 -right-1 w-5 h-5 text-green-400 bg-base-900 rounded-full" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>`;
+        } else if (d.check === 'wip') {
+          checkmark = `<svg class="absolute -top-1 -right-1 w-5 h-5 text-yellow-400 bg-base-900 rounded-full" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>`;
+        }
         btn.innerHTML = `
           ${checkmark}
           <div class="flex items-center gap-3">
@@ -285,6 +303,21 @@
         btn.addEventListener('click', () => selectDeck(d.id));
         scroller.appendChild(btn);
       });
+    }
+
+    function showDefaultMessage() {
+      const art = $('#deckContent');
+      art.innerHTML = `
+        <div class="flex items-center justify-center h-full">
+          <div class="text-center p-8">
+            <svg class="w-16 h-16 mx-auto mb-4 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            <h2 class="text-2xl font-bold text-white/70 mb-2">Welcome to HemeraTCG Expanded Decks</h2>
+            <p class="text-white/50">Click on a deck to show information</p>
+          </div>
+        </div>
+      `;
     }
 
     async function selectDeck(id) {
