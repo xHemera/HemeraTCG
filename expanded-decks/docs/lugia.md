@@ -1,6 +1,6 @@
 ---
 id: lugia
-name: Hybrid Lugia
+name: Rainbow Lugia
 show: true
 check: wip
 icon1: expanded-decks/assets/icons/lugia.png

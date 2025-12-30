@@ -7,49 +7,11 @@
   <meta name="color-scheme" content="dark light" />
   <meta name="description" content="Expanded Gauntlet — decks and guides for the Expanded format" />
   <link rel="icon" href="./expanded-decks/assets/icons/calyrex-shadow-rider.png"/>
-  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <link rel="stylesheet" href="./dist/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            base: {
-              950: '#06080F',
-              900: '#0A0E1A',
-              800: '#111827',
-              700: '#1F2937',
-              600: '#374151'
-            },
-            accent: {
-              600: '#6D28D9',
-              500: '#8B5CF6',
-              400: '#A78BFA',
-              300: '#C4B5FD'
-            },
-            cyan: {
-              500: '#06B6D4',
-              400: '#22D3EE',
-              300: '#67E8F9'
-            }
-          },
-          boxShadow: {
-            glow: '0 0 24px rgba(139, 92, 246, 0.4)',
-            'glow-lg': '0 0 40px rgba(139, 92, 246, 0.3)',
-            neon: '0 0 20px rgba(34, 211, 238, 0.4)'
-          },
-          fontFamily: {
-            display: ['Inter', 'system-ui', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-base-900 text-white font-display selection:bg-accent-500/40 selection:text-white">
   <div class="fixed -z-10 inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
