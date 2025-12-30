@@ -79,12 +79,12 @@ function getRoleIcon(role) {
     'contributor': 'Contributor',
     'admin': 'Administrator'
   };
-  
+
   const icons = {
     'owner': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 2L14 7L19 8L15.5 11.5L16 17L12 14.5L8 17L8.5 11.5L5 8L10 7L12 2Z" 
+      <path d="M12 2L14 7L19 8L15.5 11.5L16 17L12 14.5L8 17L8.5 11.5L5 8L10 7L12 2Z"
             fill="#FCD34D" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M7 16H17C17 16 18 16 18 17V20C18 21 17 21 17 21H7C7 21 6 21 6 20V17C6 16 7 16 7 16Z" 
+      <path d="M7 16H17C17 16 18 16 18 17V20C18 21 17 21 17 21H7C7 21 6 21 6 20V17C6 16 7 16 7 16Z"
             fill="#FBBF24" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="12" cy="18" r="1" fill="#F59E0B"/>
       <circle cx="9" cy="18" r="0.8" fill="#F59E0B"/>
@@ -99,11 +99,11 @@ function getRoleIcon(role) {
             stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`,
     'admin': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" 
+      <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z"
             fill="#FCA5A5" stroke="#EF4444" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`
   };
-  
+
   const icon = icons[role] || icons['contributor'];
   const roleName = roleNames[role] || 'Contributor';
   return `<span class="credit-role-icon" title="${roleName}">${icon}</span>`;

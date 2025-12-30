@@ -18,6 +18,7 @@
       "id": "shadow-rider-vmax",
       "name": "Shadow Rider Vmax",
       "file": "docs/shadow-rider-vmax.md",
+      "show": true,
       "check": "wip",
       "icon1": "expanded-decks/assets/icons/calyrex-shadow-rider.png",
       "authorCredit": {
