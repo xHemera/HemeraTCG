@@ -28,6 +28,7 @@
       }
     },
     {"id": "shadow-rider-vmax",
+	  "version": 2,
       "name": "Shadow Rider Vmax",
       "file": "docs/shadow-rider-vmax.md",
       "show": true,

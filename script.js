@@ -11,6 +11,16 @@ if (typeof marked !== 'undefined') {
   }
 }
 
+// Cache busting: add timestamp to image URLs
+// The timestamp is updated each time the page loads, forcing fresh images
+const CACHE_VERSION = Date.now();
+
+function cacheBustUrl(url) {
+  if (!url) return url;
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}v=${CACHE_VERSION}`;
+}
+
 // Load decks from JSON and build navbar
 const state = { decks: [], current: null, expanded: localStorage.getItem('deckExpanded') === 'true' };
 
@@ -46,19 +56,21 @@ async function loadDecks() {
 }
 
 function deckIcon(img, alt) {
+  const imgUrl = cacheBustUrl(img);
   return `<span class="relative flex items-center justify-center w-10 h-10">
-    <img src="${img}" alt="${alt}" class="max-w-full max-h-full object-contain drop-shadow"/>
+    <img src="${imgUrl}" alt="${alt}" class="max-w-full max-h-full object-contain drop-shadow"/>
   </span>`;
 }
 
 function buildCreditSection(credit) {
   const roleIcon = credit.role ? getRoleIcon(credit.role) : '';
   const description = credit.description ? `<p class="credit-description">${credit.description}</p>` : '';
+  const avatarUrl = cacheBustUrl(credit.avatar);
 
   return `
     <div class="credits-section">
       <div class="credit-item">
-        <img src="${credit.avatar}" alt="${credit.name}" class="credit-avatar">
+        <img src="${avatarUrl}" alt="${credit.name}" class="credit-avatar">
         <div class="credit-info">
           <div class="credit-header">
             <span class="credit-name">${credit.name}</span>
@@ -185,6 +197,14 @@ async function selectDeck(id) {
     const html = typeof marked.parse === 'function' ? marked.parse(md) : marked(md);
 
     art.innerHTML = html;
+
+    // Apply cache busting to all images in the markdown
+    $$('img', art).forEach(img => {
+      if (img.src && !img.src.includes('?v=')) {
+        const url = new URL(img.src);
+        img.src = cacheBustUrl(url.pathname + url.search);
+      }
+    });
 
     // Inject author credits after the first image
     if (deck.authorCredit) {
