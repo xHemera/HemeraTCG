@@ -197,6 +197,65 @@ html, body {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
   }
+  
+  /* Optimize main content for mobile */
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+  
+  /* Make prose content more mobile-friendly */
+  .prose {
+    font-size: 0.95rem;
+  }
+  
+  .prose h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  .prose h2 {
+    font-size: 1.35rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .prose h3 {
+    font-size: 1.15rem;
+    margin-top: 1.25rem;
+  }
+  
+  /* Make deck images larger and better on mobile */
+  .prose img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem auto;
+  }
+  
+  /* Better spacing for paragraphs */
+  .prose p {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Credits section on mobile */
+  .credits-section {
+    margin: 1rem 0;
+    padding: 0.6rem;
+  }
+  
+  .credit-avatar {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .credit-name {
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -227,5 +286,26 @@ html, body {
   header nav svg {
     height: 1.1rem;
     width: 1.1rem;
+  }
+  
+  /* Even more compact main content */
+  main {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Smaller headings */
+  .prose h1 {
+    font-size: 1.5rem;
+  }
+  
+  .prose h2 {
+    font-size: 1.2rem;
+  }
+  
+  /* Larger avatar on very small screens for better visibility */
+  .credit-avatar {
+    width: 48px;
+    height: 48px;
   }
 }
