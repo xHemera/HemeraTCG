@@ -159,3 +159,73 @@ html, body {
     width: 100%;
   }
 }
+
+/* Mobile Header Optimizations */
+@media (max-width: 768px) {
+  /* Hide text labels on small screens, keep only icons */
+  header nav a span {
+    display: none;
+  }
+  
+  header nav a {
+    padding: 0.5rem;
+    min-width: auto;
+  }
+  
+  /* Make logo text smaller */
+  header .group span {
+    font-size: 0.9rem;
+  }
+  
+  /* Make badge smaller */
+  header .group span.text-xs {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.25rem;
+  }
+  
+  /* Reduce header padding */
+  header > div > div {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Make deck scroller section more compact */
+  .border-t.border-white\/5 > div {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even more compact on very small screens */
+  header .group img {
+    height: 2rem;
+    width: 2rem;
+  }
+  
+  header .group span:first-of-type {
+    font-size: 0.85rem;
+  }
+  
+  header .group span.text-xs {
+    display: none;
+  }
+  
+  /* Smaller navigation buttons */
+  header nav {
+    gap: 0.25rem;
+  }
+  
+  header nav a,
+  header nav button {
+    padding: 0.4rem;
+  }
+  
+  header nav svg {
+    height: 1.1rem;
+    width: 1.1rem;
+  }
+}

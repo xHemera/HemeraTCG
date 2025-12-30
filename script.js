@@ -354,7 +354,7 @@ const loadDecks = async () => {
  */
 const deckIcon = (img, alt) => {
   const imgUrl = cacheBustUrl(img);
-  return `<span class="relative flex items-center justify-center w-10 h-10">
+  return `<span class="relative flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
     <img src="${imgUrl}" alt="${alt}" class="max-w-full max-h-full object-contain drop-shadow"/>
   </span>`;
 };
@@ -462,7 +462,7 @@ const renderDeckNavbar = () => {
     if (deck.show === false) return;
 
     const btn = document.createElement('button');
-    btn.className = 'group relative shrink-0 px-4 py-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 hover:border-accent-500/30 hover:shadow-glow transition-all duration-300 text-left';
+    btn.className = 'group relative shrink-0 px-3 sm:px-4 py-3 sm:py-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 hover:border-accent-500/30 hover:shadow-glow transition-all duration-300 text-left';
     btn.setAttribute('data-id', deck.id);
 
     const icons = [deck.icon1, deck.icon2]
@@ -472,9 +472,9 @@ const renderDeckNavbar = () => {
 
     btn.innerHTML = `
       ${getStatusBadge(deck.check)}
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         <div class="flex -space-x-2">${icons}</div>
-        <span class="text-sm font-semibold group-hover:text-accent-300 transition whitespace-nowrap">${deck.name}</span>
+        <span class="text-xs sm:text-sm font-semibold group-hover:text-accent-300 transition whitespace-nowrap">${deck.name}</span>
       </div>`;
 
     btn.addEventListener('click', () => selectDeck(deck.id));
