@@ -140,7 +140,7 @@ const parseFrontMatter = (markdown) => {
 // Cache configuration
 const CACHE_KEY = 'hemera_decks_cache';
 const CACHE_VERSION_KEY = 'hemera_cache_version';
-const STORAGE_VERSION = '2.0';
+const STORAGE_VERSION = '2.1'; // Bumped version to force cache refresh
 const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
 
 /**
@@ -168,25 +168,39 @@ const getCachedDecks = () => {
   try {
     const version = localStorage.getItem(CACHE_VERSION_KEY);
     if (version !== STORAGE_VERSION) {
+      console.log(`[CACHE] Version mismatch (${version} vs ${STORAGE_VERSION}), clearing cache`);
       localStorage.removeItem(CACHE_KEY);
       localStorage.setItem(CACHE_VERSION_KEY, STORAGE_VERSION);
       return null;
     }
 
     const cached = localStorage.getItem(CACHE_KEY);
-    if (!cached) return null;
+    if (!cached) {
+      console.log('[CACHE] No cached data found');
+      return null;
+    }
 
     const { timestamp, decks } = JSON.parse(cached);
 
     // Check if cache is still valid
     if (Date.now() - timestamp > CACHE_DURATION) {
+      console.log('[CACHE] Cache expired, clearing');
       localStorage.removeItem(CACHE_KEY);
       return null;
     }
 
+    // Validate cache structure
+    if (!Array.isArray(decks) || decks.length === 0) {
+      console.log('[CACHE] Invalid cache structure, clearing');
+      localStorage.removeItem(CACHE_KEY);
+      return null;
+    }
+
+    console.log(`[CACHE] Valid cache found with ${decks.length} decks`);
     return decks;
   } catch (err) {
-    console.warn('Cache read error:', err);
+    console.error('[CACHE] Cache read error:', err);
+    localStorage.removeItem(CACHE_KEY);
     return null;
   }
 };
@@ -214,20 +228,30 @@ const setCachedDecks = (decks) => {
 const loadDeckFile = async (filename) => {
   console.log(`[LOAD] Attempting to load: ${filename}`);
   try {
-    const res = await fetch(`./expanded-decks/docs/${filename}`, { cache: 'no-cache' });
-    console.log(`[LOAD] ${filename} - Status: ${res.status}`);
-    if (!res.ok) return null;
+    const url = `expanded-decks/docs/${filename}`;
+    console.log(`[LOAD] Full URL: ${url}`);
+    const res = await fetch(url, { cache: 'no-cache' });
+    console.log(`[LOAD] ${filename} - Status: ${res.status} ${res.statusText}`);
+    if (!res.ok) {
+      console.error(`[LOAD] Failed to load ${filename}: ${res.status} ${res.statusText}`);
+      return null;
+    }
 
     const markdown = await res.text();
+    console.log(`[LOAD] ${filename} - Content length: ${markdown.length} chars`);
     const { content, meta } = parseFrontMatter(markdown);
 
     // Only return visible decks
-    if (meta.show === false) return null;
+    if (meta.show === false) {
+      console.log(`[LOAD] ${filename} - Skipped (show=false)`);
+      return null;
+    }
 
+    console.log(`[LOAD] ${filename} - Successfully loaded deck: ${meta.name || 'Unknown'}`);
     return {
       id: meta.id || filename.replace('.md', ''),
       name: meta.name || 'Unknown Deck',
-      file: `docs/${filename}`,
+      file: `expanded-decks/docs/${filename}`,
       check: meta.check,
       icon1: meta.icon1,
       icon2: meta.icon2,
@@ -236,7 +260,7 @@ const loadDeckFile = async (filename) => {
       _filename: filename
     };
   } catch (err) {
-    console.warn(`Failed to load ${filename}:`, err);
+    console.error(`[LOAD] Exception loading ${filename}:`, err);
     return null;
   }
 };
@@ -255,42 +279,52 @@ const loadDecksFromServer = async () => {
  * Load all deck files with intelligent caching
  */
 const loadDecks = async () => {
+  console.log('[LOAD_DECKS] Starting...');
   const scroller = $('#deckScroller');
-  
+
   // Show loading indicator
   if (scroller) {
     scroller.innerHTML = '<div class="text-white/50 text-sm px-4">Loading decks...</div>';
   }
-  
+
   try {
     // Try to load from cache first
     const cached = getCachedDecks();
-    
-    console.log('Cache status:', cached ? `Found ${cached.length} decks` : 'No cache');
+
+    console.log('[LOAD_DECKS] Cache status:', cached ? `Found ${cached.length} decks` : 'No cache');
 
     if (cached) {
       // Display cached content immediately
+      console.log('[LOAD_DECKS] Using cached decks');
       state.decks = cached;
       renderDeckNavbar();
 
       // Load fresh data in background and update if changed
+      console.log('[LOAD_DECKS] Starting background refresh...');
       loadDecksFromServer().then(freshDecks => {
-        console.log('Fresh decks loaded:', freshDecks.length);
+        console.log('[LOAD_DECKS] Fresh decks loaded:', freshDecks.length);
         const cacheHash = JSON.stringify(cached.map(d => d.id + d.name));
         const freshHash = JSON.stringify(freshDecks.map(d => d.id + d.name));
 
         if (cacheHash !== freshHash) {
-          console.log('Cache updated with fresh data');
+          console.log('[LOAD_DECKS] Cache updated with fresh data');
           state.decks = freshDecks;
           renderDeckNavbar();
           setCachedDecks(freshDecks);
+        } else {
+          console.log('[LOAD_DECKS] Cache still valid');
         }
-      }).catch(err => console.warn('Background refresh failed:', err));
+      }).catch(err => console.error('[LOAD_DECKS] Background refresh failed:', err));
     } else {
       // No cache: load normally
-      console.log('Loading decks from server...');
+      console.log('[LOAD_DECKS] No cache, loading from server...');
       const decks = await loadDecksFromServer();
-      console.log('Decks loaded:', decks.length);
+      console.log('[LOAD_DECKS] Decks loaded from server:', decks.length);
+      if (decks.length === 0) {
+        console.error('[LOAD_DECKS] WARNING: No decks were loaded!');
+        scroller.innerHTML = '<div class="text-red-300 text-sm px-4">No decks found. Check console for errors.</div>';
+        return;
+      }
       state.decks = decks;
       setCachedDecks(decks);
       renderDeckNavbar();
@@ -299,14 +333,15 @@ const loadDecks = async () => {
     // Handle initial deck selection from URL
     const initialDeck = getParam('deck');
     if (initialDeck) {
+      console.log('[LOAD_DECKS] Initial deck from URL:', initialDeck);
       const deck = state.decks.find(d => d.id === initialDeck);
       deck ? selectDeck(initialDeck) : showDefaultMessage();
     } else {
       showDefaultMessage();
     }
   } catch (err) {
-    console.error('Error loading decks:', err);
-    $('#deckScroller').innerHTML = '<div class="text-red-300">Error loading decks</div>';
+    console.error('[LOAD_DECKS] Error loading decks:', err);
+    $('#deckScroller').innerHTML = '<div class="text-red-300">Error loading decks. Check console.</div>';
   }
 };
 
@@ -496,7 +531,7 @@ const selectDeck = async (id) => {
     let content = deck._content;
 
     if (!content) {
-      const url = `./expanded-decks/${deck.file}`;
+      const url = deck.file;
       const res = await fetch(url, { cache: 'no-cache' });
       if (!res.ok) throw new Error('404');
 
