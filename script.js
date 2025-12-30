@@ -5,23 +5,6 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-// Detect base path for GitHub Pages
-const getBasePath = () => {
-  const path = window.location.pathname;
-  // If we're in a subdirectory (GitHub Pages repo), extract it
-  const match = path.match(/^\/([^\/]+)\//); 
-  return match ? `/${match[1]}/` : '/';
-};
-
-const BASE_PATH = getBasePath();
-const resolvePath = (path) => {
-  // If path already starts with /, return as-is
-  if (path.startsWith('/')) return path;
-  // Otherwise, prepend base path, avoiding double slashes
-  const base = BASE_PATH === '/' ? '' : BASE_PATH.replace(/\/$/, '');
-  return `${base}/${path}`;
-};
-
 // ============================================
 // INITIALIZATION
 // ============================================
@@ -36,7 +19,7 @@ if ($('#downloadTemplate')) {
   console.log('[INIT] Download button found');
   $('#downloadTemplate').addEventListener('click', async () => {
     try {
-      const response = await fetch(resolvePath('expanded-decks/docs/TEMPLATE.md'));
+      const response = await fetch('expanded-decks/docs/TEMPLATE.md');
       const content = await response.text();
       const blob = new Blob([content], { type: 'text/markdown' });
       const url = URL.createObjectURL(blob);
@@ -245,7 +228,7 @@ const setCachedDecks = (decks) => {
 const loadDeckFile = async (filename) => {
   console.log(`[LOAD] Attempting to load: ${filename}`);
   try {
-    const url = resolvePath(`expanded-decks/docs/${filename}`);
+    const url = `expanded-decks/docs/${filename}`;
     console.log(`[LOAD] Full URL: ${url}`);
     const res = await fetch(url, { cache: 'no-cache' });
     console.log(`[LOAD] ${filename} - Status: ${res.status} ${res.statusText}`);
@@ -268,10 +251,10 @@ const loadDeckFile = async (filename) => {
     return {
       id: meta.id || filename.replace('.md', ''),
       name: meta.name || 'Unknown Deck',
-      file: resolvePath(`expanded-decks/docs/${filename}`),
+      file: `expanded-decks/docs/${filename}`,
       check: meta.check,
-      icon1: resolvePath(meta.icon1),
-      icon2: resolvePath(meta.icon2),
+      icon1: meta.icon1,
+      icon2: meta.icon2,
       authorCredit: meta.author,
       _content: content,
       _filename: filename
@@ -397,8 +380,7 @@ const buildCreditSection = (credit) => {
 
   const roleIcon = credit.role ? getRoleIcon(credit.role) : '';
   const description = credit.description ? `<p class="credit-description">${credit.description}</p>` : '';
-  const resolvedAvatar = resolvePath(credit.avatar);
-  const avatarUrl = cacheBustUrl(resolvedAvatar);
+  const avatarUrl = cacheBustUrl(credit.avatar);
 
   return `
     <div class="credits-section">
@@ -565,10 +547,9 @@ const selectDeck = async (id) => {
     // Remove any existing H1 from the content to avoid duplicates
     html = html.replace(/<h1[^>]*>.*?<\/h1>/i, '');
 
-    // Apply cache busting to images directly in HTML and fix paths
+    // Apply cache busting to images directly in HTML
     html = html.replace(/<img([^>]*)src="([^"]+)"/g, (match, attrs, src) => {
-      const resolvedSrc = resolvePath(src);
-      const bustedSrc = cacheBustUrl(resolvedSrc);
+      const bustedSrc = cacheBustUrl(src);
       return `<img${attrs}src="${bustedSrc}"`;
     });
 
