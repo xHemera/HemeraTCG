@@ -1,21 +1,33 @@
 {
   "decks": [
-    {
-      "id": "regidrago-vstar",
-      "name": "Regidrago Vstar",
-      "file": "docs/regidrago-vstar.md",
-      "show": false,
+	{"id": "exemple",
+      "name": "Exemple",
+      "file": "docs/vileplume-bunnelby.md",
+	  "show": false,
       "check": false,
-      "icon1": "expanded-decks/assets/icons/regidrago.png",
+      "icon1": "expanded-decks/assets/icons/vileplume.png",
+      "icon2": "expanded-decks/assets/icons/bunnelby.png",
       "authorCredit": {
         "name": "Lubyllule (Stéphane Ivanoff)",
         "description": "This guide is summarized from his Twitter thread",
         "avatar": "social-icons/luby.jpg",
-        "link": "https://x.com/lubyllule/status/1782861203506622520"
+        "link": "https://x.com/lubyllule/status/1841155814947471792"
       }
     },
-    {
-      "id": "shadow-rider-vmax",
+    {"id": "regidrago-vstar",
+      "name": "Regidrago Vstar",
+      "file": "docs/regidrago-vstar.md",
+      "show": true,
+      "check": "wip",
+      "icon1": "expanded-decks/assets/icons/regidrago.png",
+      "authorCredit": {
+        "name": "Hemera (Tony Besnard)",
+		"role": "owner",
+        "avatar": "social-icons/hemera.png",
+        "link": "./contact.html"
+      }
+    },
+    {"id": "shadow-rider-vmax",
       "name": "Shadow Rider Vmax",
       "file": "docs/shadow-rider-vmax.md",
       "show": true,
@@ -28,8 +40,7 @@
         "link": "./contact.html"
       }
     },
-    {
-      "id": "mew-vmax",
+    {"id": "mew-vmax",
       "name": "Mew Vmax",
       "file": "docs/mew-vmax.md",
 	  "show": false,
@@ -43,8 +54,7 @@
         "link": "https://x.com/lubyllule/status/1808156863986274755"
       }
     },
-    {
-      "id": "charizard-ex",
+    {"id": "charizard-ex",
       "name": "TeraZard",
       "file": "docs/charizard-ex.md",
 	  "show": false,
@@ -57,17 +67,21 @@
         "link": "https://x.com/lubyllule/status/1790468650673025365"
       }
     },
-    {
-      "id": "lugia",
+    {"id": "lugia",
       "name": "Rainbow Lugia",
       "file": "docs/lugia.md",
-	  "show": false,
-      "check": false,
+	  "show": true,
+      "check": "wip",
       "icon1": "expanded-decks/assets/icons/lugia.png",
-      "icon2": "expanded-decks/assets/icons/archeops.png"
+      "icon2": "expanded-decks/assets/icons/archeops.png",
+      "authorCredit": {
+        "name": "Hemera (Tony Besnard)",
+		"role": "owner",
+        "avatar": "social-icons/hemera.png",
+        "link": "./contact.html"
+      }
     },
-    {
-      "id": "vileplume-bunnelby",
+    {"id": "vileplume-bunnelby",
       "name": "Vileplume Bunnelby",
       "file": "docs/vileplume-bunnelby.md",
 	  "show": false,
@@ -81,30 +95,27 @@
         "link": "https://x.com/lubyllule/status/1841155814947471792"
       }
     },
-    {
-      "id": "ceruledge",
+    {"id": "ceruledge",
       "name": "Ceruledge",
       "file": "docs/ceruledge.md",
 	  "show": false,
       "check": false,
       "icon1": "expanded-decks/assets/icons/ceruledge.png"
     },
-    {
-      "id": "miraidon",
+    {"id": "miraidon",
       "name": "Miraidon Box",
       "file": "docs/miraidon.md",
-	  "show": false,
-      "check": false,
+	  "show": true,
+      "check": "wip",
       "icon1": "expanded-decks/assets/icons/miraidon.png",
       "authorCredit": {
-        "name": "Lubyllule (Stéphane Ivanoff)",
-        "description": "This guide is summarized from his Twitter thread",
-        "avatar": "social-icons/luby.jpg",
-        "link": "https://x.com/lubyllule/status/1904303865899733083"
+        "name": "Hemera (Tony Besnard)",
+		"role": "owner",
+        "avatar": "social-icons/hemera.png",
+        "link": "./contact.html"
       }
     },
-    {
-      "id": "tsareena",
+    {"id": "tsareena",
       "name": "Tsareena V",
       "file": "docs/tsareena.md",
 	  "show": false,
