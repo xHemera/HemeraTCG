@@ -134,7 +134,7 @@ const parseFrontMatter = (markdown) => {
 // Cache configuration
 const CACHE_KEY = 'hemera_decks_cache';
 const CACHE_VERSION_KEY = 'hemera_cache_version';
-const STORAGE_VERSION = '1.2';
+const STORAGE_VERSION = '2.0';
 const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
 
 /**
@@ -247,9 +247,18 @@ const loadDecksFromServer = async () => {
  * Load all deck files with intelligent caching
  */
 const loadDecks = async () => {
+  const scroller = $('#deckScroller');
+  
+  // Show loading indicator
+  if (scroller) {
+    scroller.innerHTML = '<div class="text-white/50 text-sm px-4">Loading decks...</div>';
+  }
+  
   try {
     // Try to load from cache first
     const cached = getCachedDecks();
+    
+    console.log('Cache status:', cached ? `Found ${cached.length} decks` : 'No cache');
 
     if (cached) {
       // Display cached content immediately
@@ -258,10 +267,12 @@ const loadDecks = async () => {
 
       // Load fresh data in background and update if changed
       loadDecksFromServer().then(freshDecks => {
+        console.log('Fresh decks loaded:', freshDecks.length);
         const cacheHash = JSON.stringify(cached.map(d => d.id + d.name));
         const freshHash = JSON.stringify(freshDecks.map(d => d.id + d.name));
 
         if (cacheHash !== freshHash) {
+          console.log('Cache updated with fresh data');
           state.decks = freshDecks;
           renderDeckNavbar();
           setCachedDecks(freshDecks);
@@ -269,7 +280,9 @@ const loadDecks = async () => {
       }).catch(err => console.warn('Background refresh failed:', err));
     } else {
       // No cache: load normally
+      console.log('Loading decks from server...');
       const decks = await loadDecksFromServer();
+      console.log('Decks loaded:', decks.length);
       state.decks = decks;
       setCachedDecks(decks);
       renderDeckNavbar();
