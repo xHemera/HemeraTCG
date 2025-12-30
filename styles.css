@@ -1,12 +1,19 @@
+/* ============================================
+   HEMERA TCG - EXPANDED GAUNTLET
+   Custom Styles & Responsive Design
+   ============================================ */
+
+/* Base Styles */
 html, body {
   height: 100%;
 }
 
-/* Smooth content transitions */
+/* Content Transitions */
 #deckContent {
   transition: opacity 0.2s ease-in-out;
 }
 
+/* Glass Effect Components */
 .glass {
   backdrop-filter: saturate(180%) blur(16px);
   background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(34,211,238,0.04));
@@ -36,7 +43,10 @@ html, body {
   mask-composite: exclude;
 }
 
-/* Credits Section Styles */
+/* ============================================
+   CREDITS SECTION
+   ============================================ */
+
 .credits-section {
   margin: 0.75rem 0;
   padding: 0.4rem 0.6rem;
@@ -138,7 +148,11 @@ html, body {
   box-shadow: 0 2px 8px rgba(139,92,246,0.15);
 }
 
-/* Responsive Design */
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet & Small Screens (max-width: 640px) */
 @media (max-width: 640px) {
   .credit-item {
     flex-direction: column;
@@ -160,7 +174,7 @@ html, body {
   }
 }
 
-/* Mobile Header Optimizations */
+/* Mobile & Tablet Header (max-width: 768px) */
 @media (max-width: 768px) {
   /* Hide text labels on small screens, keep only icons */
   header nav a span {
@@ -258,6 +272,7 @@ html, body {
   }
 }
 
+/* Very Small Screens (max-width: 480px) */
 @media (max-width: 480px) {
   /* Even more compact on very small screens */
   header .group img {

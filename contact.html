@@ -83,15 +83,17 @@
         <span class="text-cyan-300 text-sm font-medium">Open →</span>
       </a>
     </section>
-
-    <p class="mt-10 text-center text-xs text-white/40"></p>
   </main>
 
   <script>
     const $ = (s, r=document) => r.querySelector(s);
     const copyBtn = $('#copyDiscord');
     copyBtn?.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText('x.hemera'); copyBtn.textContent = 'Copied!'; setTimeout(()=>copyBtn.textContent='Copy', 1500); } catch {}
+      try { 
+        await navigator.clipboard.writeText('x.hemera'); 
+        copyBtn.textContent = 'Copied!'; 
+        setTimeout(() => copyBtn.textContent = 'Copy', 1500); 
+      } catch {}
     });
   </script>
 </body>
