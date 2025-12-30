@@ -9,11 +9,14 @@ const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 // INITIALIZATION
 // ============================================
 
+console.log('[INIT] Script loaded successfully');
+
 // Set current year in footer
 if ($('#year')) $('#year').textContent = new Date().getFullYear();
 
 // Download template button
 if ($('#downloadTemplate')) {
+  console.log('[INIT] Download button found');
   $('#downloadTemplate').addEventListener('click', async () => {
     try {
       const response = await fetch('expanded-decks/docs/TEMPLATE.md');
@@ -36,7 +39,10 @@ if ($('#downloadTemplate')) {
 
 // Configure Markdown renderer
 if (typeof marked !== 'undefined' && marked.setOptions) {
+  console.log('[INIT] Marked.js library loaded');
   marked.setOptions({ breaks: true, gfm: true });
+} else {
+  console.error('[INIT] Marked.js library NOT FOUND');
 }
 
 // ============================================
@@ -206,8 +212,10 @@ const setCachedDecks = (decks) => {
  * @returns {Promise<Object|null>} - Deck object or null if failed
  */
 const loadDeckFile = async (filename) => {
+  console.log(`[LOAD] Attempting to load: ${filename}`);
   try {
     const res = await fetch(`./expanded-decks/docs/${filename}`, { cache: 'no-cache' });
+    console.log(`[LOAD] ${filename} - Status: ${res.status}`);
     if (!res.ok) return null;
 
     const markdown = await res.text();
@@ -575,4 +583,5 @@ $('#expandToggle')?.addEventListener('click', () => {
 // INITIALIZATION
 // ============================================
 
+console.log('[INIT] Starting loadDecks()');
 loadDecks();
