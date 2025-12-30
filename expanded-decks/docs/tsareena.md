@@ -1,3 +1,17 @@
+---
+id: tsareena
+name: Tsareena V
+show: false
+check: false
+icon1: expanded-decks/assets/icons/tsareena.png
+icon2: expanded-decks/assets/icons/garbodor.png
+author:
+  name: Lubyllule (Stéphane Ivanoff)
+  description: This guide is summarized from his Twitter thread
+  avatar: social-icons/luby.jpg
+  link: https://x.com/lubyllule/status/1787930036676280745
+---
+
 # Tsareena V
 
 ![Decklist](expanded-decks/assets/decklist/Tsareena.png)

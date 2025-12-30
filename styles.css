@@ -2,6 +2,11 @@ html, body {
   height: 100%;
 }
 
+/* Smooth content transitions */
+#deckContent {
+  transition: opacity 0.2s ease-in-out;
+}
+
 .glass {
   backdrop-filter: saturate(180%) blur(16px);
   background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(34,211,238,0.04));
@@ -27,6 +32,7 @@ html, body {
   background: linear-gradient(135deg, rgba(139,92,246,0.6), rgba(34,211,238,0.4));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
 }
 

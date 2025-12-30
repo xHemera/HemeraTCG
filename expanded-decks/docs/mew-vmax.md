@@ -1,3 +1,17 @@
+---
+id: mew-vmax
+name: Mew Vmax
+show: false
+check: false
+icon1: expanded-decks/assets/icons/mew.png
+icon2: expanded-decks/assets/icons/genesect.png
+author:
+  name: Lubyllule (Stéphane Ivanoff)
+  description: This guide is summarized from his Twitter thread
+  avatar: social-icons/luby.jpg
+  link: https://x.com/lubyllule/status/1808156863986274755
+---
+
 # Mew Vmax
 
 ![Decklist](expanded-decks/assets/decklist/Mew.png)

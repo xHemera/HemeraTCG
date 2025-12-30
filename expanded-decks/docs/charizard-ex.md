@@ -1,3 +1,16 @@
+---
+id: charizard-ex
+name: TeraZard
+show: false
+check: false
+icon1: expanded-decks/assets/icons/charizard.png
+author:
+  name: Lubyllule (Stéphane Ivanoff)
+  description: This guide is summarized from his Twitter thread
+  avatar: social-icons/luby.jpg
+  link: https://x.com/lubyllule/status/1790468650673025365
+---
+
 # TeraZard
 
 ![Decklist](expanded-decks/assets/decklist/Charizard.png)

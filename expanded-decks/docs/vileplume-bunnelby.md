@@ -1,3 +1,17 @@
+---
+id: vileplume-bunnelby
+name: Vileplume Bunnelby
+show: false
+check: false
+icon1: expanded-decks/assets/icons/vileplume.png
+icon2: expanded-decks/assets/icons/bunnelby.png
+author:
+  name: Lubyllule (Stéphane Ivanoff)
+  description: This guide is summarized from his Twitter thread
+  avatar: social-icons/luby.jpg
+  link: https://x.com/lubyllule/status/1841155814947471792
+---
+
 # Vileplume Bunnelby
 
 ![Decklist](expanded-decks/assets/decklist/BunnelbyVileplume.png)
