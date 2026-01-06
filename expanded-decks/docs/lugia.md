@@ -1,15 +1,15 @@
 ---
 id: lugia
-name: Rainbow Lugia
+name: Dragon Lugia
 show: true
 check: wip
 icon1: expanded-decks/assets/icons/lugia.png
-icon2: expanded-decks/assets/icons/archeops.png
+icon2: expanded-decks/assets/icons/tinachomp.png
 author:
-  name: Hemera (Tony Besnard)
-  role: owner
-  avatar: social-icons/hemera.png
+  name: PKMNTrainer_Synthia
+  role: contributor
+  avatar: social-icons/PKMNTrainer_Synthia.png
   link: ./contact.html
 ---
 
-![Decklist](expanded-decks/assets/decklist/Lugia.png)
+![Decklist](expanded-decks/assets/decklist/DragonLugia.png)
