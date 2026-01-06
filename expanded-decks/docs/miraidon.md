@@ -1,7 +1,7 @@
 ---
 id: miraidon
 name: Miraidon Box
-show: true
+show: false
 check: wip
 icon1: expanded-decks/assets/icons/miraidon.png
 author:
