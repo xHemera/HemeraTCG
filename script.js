@@ -145,13 +145,11 @@ const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
 const DECK_FILES = [
   'regidrago-vstar.md',
   'shadow-rider-vmax.md',
-  'mew-vmax.md',
-  'charizard-ex.md',
   'lugia.md',
-  'vileplume-bunnelby.md',
-  'ceruledge.md',
-  'miraidon.md',
-  'tsareena.md'
+  'vileplume.md',
+  'gardevoir.md',
+  'absol.md',
+  'regidrago-peonia.md'
 ];
 
 /**
