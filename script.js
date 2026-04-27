@@ -134,8 +134,15 @@ const parseFrontMatter = (markdown) => {
 // Cache configuration
 const CACHE_KEY = 'hemera_decks_cache';
 const CACHE_VERSION_KEY = 'hemera_cache_version';
-const STORAGE_VERSION = '2.1'; // Bumped version to force cache refresh
+const STORAGE_VERSION = '2.2'; // Bumped version to force cache refresh
 const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
+
+const DECK_ID_ALIASES = {
+  gardy: 'gardevoir',
+  absol: 'mega-absol'
+};
+
+const normalizeDeckId = (deckId) => DECK_ID_ALIASES[deckId] || deckId;
 
 /**
  * List of markdown files to load
@@ -291,7 +298,7 @@ const loadDecks = async () => {
     }
 
     // Handle initial deck selection from URL
-    const initialDeck = getParam('deck');
+    const initialDeck = normalizeDeckId(getParam('deck'));
     if (initialDeck) {
       const deck = state.decks.find(d => d.id === initialDeck);
       deck ? selectDeck(initialDeck) : showDefaultMessage();
