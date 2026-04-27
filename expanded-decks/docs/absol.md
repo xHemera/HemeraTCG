@@ -1,0 +1,16 @@
+---
+id: mega-absol
+name: Mega Absol
+show: true
+check: wip
+icon1: expanded-decks/assets/icons/absol-mega.png
+author:
+  name: Hemera (Tony Besnard)
+  role: owner
+  avatar: social-icons/hemera.png
+  link: ./contact.html
+---
+
+# Mega Absol
+
+![Decklist](expanded-decks/assets/decklist/E_Absol.png)

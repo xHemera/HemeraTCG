@@ -1,10 +1,9 @@
 ---
-id: regidrago-peonia
-name: Regidrago Peonia
+id: gardevoir
+name: Gardevoir box
 show: true
 check: wip
 icon1: expanded-decks/assets/icons/regidrago.png
-icon2: expanded-decks/assets/icons/jirachi.png
 author:
   name: Hemera (Tony Besnard)
   role: owner
@@ -12,6 +11,6 @@ author:
   link: ./contact.html
 ---
 
-# Regidrago Peonia
+# Gardevoir Box
 
-![Decklist](expanded-decks/assets/decklist/E_Regidrago-Jirachi.png)
+![Decklist](expanded-decks/assets/decklist/E_Gardevoir.png)
