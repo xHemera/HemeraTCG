@@ -2,14 +2,19 @@
 
 ## 🎯 Overview
 
-Adding a new deck guide is simple! Just create **one markdown file** with metadata at the top. The system features intelligent caching and automatic discovery.
+Adding a new deck guide is simple! Just create **one markdown/MDX file** with metadata at the top. The system features automatic discovery and built-in guide components.
 
 ## 🚀 Quick Start (3 Steps)
 
-1. **Create** `expanded-decks/docs/my-deck.md` using the template
+1. **Create** `expanded-decks/docs/my-deck.mdx` using the template
 2. **Add images** to `expanded-decks/assets/decklist/` and `assets/icons/`
-3. **Register** your file in `DECK_FILES` array (`script.js` line ~100)
-4. **Commit** and push!
+3. **Commit** and push (deck is auto-discovered at build time)
+
+Or generate the file directly:
+
+```bash
+bun run new:deck my-deck "My Deck"
+```
 
 That's it! The site features:
 - ✅ **Automatic cache-busting** - Images update instantly
@@ -19,7 +24,7 @@ That's it! The site features:
 
 ## 📝 Front Matter Metadata
 
-Add YAML metadata at the top of your markdown file:
+Add YAML metadata at the top of your markdown/MDX file:
 
 ```markdown
 ---
@@ -98,18 +103,40 @@ Add your images to the appropriate folders:
 - **Decklist**: 800px wide (PNG or JPG)
 - **Avatar**: 80x80px (PNG or JPG, round or square)
 
-## 📐 Register Your Deck
+## 🧱 MDX Components
 
-Add your filename to the `DECK_FILES` array in `script.js` (around line 100):
+When using `.mdx`, you can embed reusable UI components directly in your guide:
 
-```javascript
-const DECK_FILES = [
-  'regidrago-vstar.md',
-  'shadow-rider-vmax.md',
-  // ... other decks
-  'my-deck.md'  // ← Add your file here
-];
+- `DeckTip` - contextual info/success/warning note blocks
+- `WarningBox` - high-visibility caution panel
+- `ImageFigure` - image with caption
+- `MatchupTable` - structured matchup planning table
+- `CardGrid` - visual card spotlight grid
+
+Example:
+
+```mdx
+<DeckTip type="info" title="Pilot mindset">
+Play for tempo first, then convert with your strongest attacker.
+</DeckTip>
+
+<MatchupTable
+  rows={[
+    { matchup: 'Lugia', difficulty: 'Hard', plan: 'Disrupt setup and deny energy' },
+    { matchup: 'Miraidon', difficulty: 'Even', plan: 'Race early prizes' }
+  ]}
+/>
 ```
+
+## 📐 Deck Discovery
+
+No manual registration is needed.
+
+Any file matching `expanded-decks/docs/*.{md,mdx}` (except templates) is automatically included in the navbar when:
+
+1. the file has valid front matter
+2. `show` is not `false`
+3. the site is rebuilt and deployed
 
 ## 🔄 How Caching Works
 
@@ -204,13 +231,17 @@ Before submitting, verify:
 
 ## 📚 Template
 
-Use `expanded-decks/docs/TEMPLATE.md` as your starting point:
+Use `expanded-decks/docs/TEMPLATE.mdx` as your starting point:
 
 ```bash
-cp expanded-decks/docs/TEMPLATE.md expanded-decks/docs/my-deck.md
+bun run new:deck my-deck "My Deck"
 ```
 
-Then edit the metadata and content.
+Then edit the metadata/content and run:
+
+```bash
+bun run sync:public
+```
 
 ## 🚀 Performance Benefits
 

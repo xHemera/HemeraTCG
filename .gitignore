@@ -1,4 +1,6 @@
 node_modules/
+.next/
+out/
+dist/
+public/
 *.map
-package-lock.json
-hmm

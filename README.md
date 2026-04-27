@@ -15,36 +15,49 @@ Hemera TCG is a personal deck library and learning resource for the Pokémon TCG
 Want to add your own deck guide? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions.
 
 **Quick start:**
-1. Copy `expanded-decks/docs/TEMPLATE.md` as your starting point
+1. Copy `expanded-decks/docs/TEMPLATE.mdx` as your starting point
 2. Add your deck metadata (YAML front matter) and content
-3. Add the filename to `DECK_FILES` in `script.js`
-4. Submit a pull request!
+3. Commit and push (no manual registration needed)
+4. Submit a pull request
+
+### Bun Commands
+
+- `bun run dev` - starts Next.js dev server (auto-syncs `expanded-decks/` and `social-icons/` to `public/`)
+- `bun run build` - static export build for GitHub Pages (auto-syncs before build)
+- `bun run new:deck <slug> "Deck Name"` - creates a new deck markdown file from template
+- `bun run sync:public` - manually syncs static assets/docs to `public/`
 
 ## 🔧 How It Works
 
-The website dynamically loads and displays deck guides written in Markdown format with YAML metadata:
+The website is now built with Next.js and dynamically renders deck guides written in Markdown/MDX format with YAML metadata:
 
 1. **Front Matter Metadata**: Each deck guide contains its configuration in YAML format at the top
-2. **Markdown Guides**: Each deck has its own `.md` file in `expanded-decks/docs/`
-3. **Intelligent Caching**: 30-minute localStorage cache for instant loading on repeat visits
-4. **Dynamic Rendering**: JavaScript fetches and renders Markdown content in real-time
-5. **Lazy Loading**: Deck content loaded only when selected, with HTML render caching
+2. **Markdown + MDX Guides**: Each deck has its own `.md` or `.mdx` file in `expanded-decks/docs/`
+3. **Automatic Discovery**: New `.md` and `.mdx` files in `expanded-decks/docs/` are auto-detected at build time
+4. **Dynamic Rendering**: React client renders MDX content with reusable guide components
+5. **Query Deep Link**: `?deck=<id>` works for direct deck links
 6. **Author Credits**: Contributors are automatically credited via front matter metadata
 
 ### Project Structure
 ```
 HemeraTCG/
-├── index.html              # Main page
-├── contact.html            # Contact/contribution page
-├── styles.css              # Custom styles
-├── script.js               # Core functionality (includes YAML parser & caching)
+├── app/
+│   ├── page.js             # Main page (React)
+│   ├── contact/page.js     # Contact page (React)
+│   ├── layout.js           # App shell
+│   └── globals.css         # Tailwind + custom styles
+├── components/
+│   └── DeckExplorer.js     # Deck UI and interactions
+├── lib/
+│   ├── decks.js            # Markdown/MDX loading + front matter parsing
+│   └── site.js             # Base path helpers
+├── next.config.mjs         # Static export config for GitHub Pages
 ├── CONTRIBUTING.md         # Contribution guide (English)
-├── CONTRIBUTING.fr.md      # Guide de contribution (Français)
-├── OPTIMIZATIONS.md        # Technical optimization details
+├── .github/workflows/      # Pages deployment workflow
 └── expanded-decks/
-    ├── docs/               # Markdown guides with YAML front matter
-    │   ├── TEMPLATE.md     # Template for new guides
-    │   └── *.md            # Individual deck guides
+    ├── docs/               # Markdown/MDX guides with YAML front matter
+    │   ├── TEMPLATE.mdx    # Template for new guides
+    │   └── *.{md,mdx}      # Individual deck guides
     └── assets/             # Images & icons
         ├── decklist/       # Decklist images
         ├── icons/          # Deck icons for navbar
@@ -53,15 +66,18 @@ HemeraTCG/
 
 ## ✨ Features
 
-- **⚡ Intelligent Caching**: 30-minute localStorage cache for instant page loads
-- **🚀 Lazy Loading**: Deck content loaded only when needed, with HTML caching
+- **⚡ Next.js Static Export**: Optimized static output for GitHub Pages
+- **🚀 Automatic Deck Discovery**: Add one `.md` or `.mdx` file and it appears automatically
+- **🧱 Reusable MDX Components**: DeckTip, WarningBox, MatchupTable, ImageFigure, CardGrid
 - **🎨 Smooth Transitions**: Fade effects during content loading
 - **🔄 Automatic Cache-Busting**: Images update automatically when modified
 - **📝 Front Matter Metadata**: Each deck guide contains its own configuration
-- **✅ No Manual JSON Editing**: Just create markdown files!
+- **✅ No Manual Registration**: No deck list array to maintain
+- **🛠 Bun-first Workflow**: Local scripts and CI run with Bun
+- **📁 Automatic Public Sync**: Build/dev automatically sync static docs and assets
 - **🏆 Role Badges**: Display contributor roles (owner, honor, contributor)
 - **📊 Status Badges**: Show deck completion status (WIP, complete)
-- **📦 Parallel Loading**: All decks load simultaneously for 70% faster initial load
+- **🔗 Deep-link support**: Existing `?deck=` links still work
 
 ## ⚙️ Performance
 
@@ -78,7 +94,7 @@ We welcome contributions from the Expanded community! If you'd like to:
 - Report issues
 - Collaborate on content
 
-**Please visit the [Contact page](https://xhemera.github.io/HemeraTCG/contact.html) on our website** to get in touch with us.
+**Please visit the [Contact page](https://xhemera.github.io/HemeraTCG/contact/) on our website** to get in touch with us.
 
 ---
 

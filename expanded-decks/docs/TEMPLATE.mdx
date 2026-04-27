@@ -1,0 +1,65 @@
+---
+id: my-deck-id
+name: My Deck Name
+show: true
+check: false
+icon1: expanded-decks/assets/icons/pokemon1.png
+icon2: expanded-decks/assets/icons/pokemon2.png
+author:
+  name: Your Name
+  role: contributor
+  avatar: social-icons/avatar.jpg
+  link: /contact/
+  description: Optional description
+---
+
+# My Deck Name
+
+<ImageFigure
+  src="expanded-decks/assets/decklist/MyDeck.png"
+  alt="My Decklist"
+  caption="Full 60-card list"
+/>
+
+## Overview
+Brief description of the deck and its strategy.
+
+<DeckTip type="info" title="Pilot mindset">
+Play this deck with a tempo-first plan: stabilize, map prizes, then close quickly.
+</DeckTip>
+
+## Core Engine
+
+### Key Pokemon
+- **Pokemon 1** - Role description
+- **Pokemon 2** - Role description
+
+### Key Trainers
+- **Card 1** - Why it's important
+- **Card 2** - Why it's important
+
+## Matchups
+
+<MatchupTable
+  rows={[
+    { matchup: 'Deck X', difficulty: 'Favorable', plan: 'Pressure early and deny setup' },
+    { matchup: 'Deck Y', difficulty: 'Hard', plan: 'Preserve resources and force awkward prizes' }
+  ]}
+/>
+
+## Tech Options
+
+<CardGrid
+  cards={[
+    { name: 'Tech Card 1', image: 'expanded-decks/assets/icons/tech1.png', note: 'For heavy ability matchups' },
+    { name: 'Tech Card 2', image: 'expanded-decks/assets/icons/tech2.png', note: 'Extra reach in close games' }
+  ]}
+/>
+
+<WarningBox title="Common mistake">
+Do not burn your switching cards too early in matchups that punish bench traps.
+</WarningBox>
+
+## Tips & Tricks
+- Keep one flexible attacker option for surprise lines.
+- Plan two turns ahead for energy attachments.

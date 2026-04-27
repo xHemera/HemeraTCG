@@ -11,7 +11,11 @@ Place your social media icon images here.
 - `instagram.png`
 - `discord.png`
 - `league.png`
-- `silentlab.png`
+- `silent-lab.png`
+
+## Notes
+- Use lowercase, hyphenated filenames for new icons.
+- Keep file sizes small so the contact page loads quickly.
 
 You can download free icons from:
 - [Icons8](https://icons8.com)
